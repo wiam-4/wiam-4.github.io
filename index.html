@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio de Wiam Aarab, étudiante ingénieure en Génie Logiciel et IA à l'ENSA Oujda.">
+<title>Wiam Aarab Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark developer portfolio. Editor-tab nav, hero with big name + readable terminal window, figures band, line-numbered about window, project cards styled as editor windows with a cursor-following spotlight on hover, git-log timeline, tagged skills, terminal-style contact. */
+:root {
+  --bg: #0C111C;
+  --panel: #131A29;
+  --panel-2: #0F1522;
+  --line: #222C42;
+  --fg: #E7ECF5;
+  --muted: #8E9AB3;
+  --accent: #A9B8FF;
+  --accent-ink: #0C111C;
+  --mint: #8FE0C6;
+  --amber: #F3C98B;
+  --rose: #F29CB0;
+  --font-display: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; background: var(--bg); }
+body {
+  background-color: var(--bg);
+  background-image: radial-gradient(rgba(169, 184, 255, 0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* Header: editor tabs */
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 19;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding-block: 0.85rem;
+  white-space: nowrap;
+}
+.brand b { color: var(--accent); font-weight: 700; }
+.tabs { display: flex; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding: 0.95rem 1rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.tabs a::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dot, var(--accent)); opacity: 0.8; }
+.tabs li:nth-child(2) a { --dot: var(--mint); }
+.tabs li:nth-child(3) a { --dot: var(--amber); }
+.tabs li:nth-child(4) a { --dot: var(--rose); }
+.tabs li:nth-child(5) a { --dot: var(--accent); }
+.tabs a:hover { color: var(--fg); background: var(--panel-2); border-bottom-color: var(--dot, var(--accent)); }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto auto;
+  width: 60%;
+  height: 120%;
+  background: radial-gradient(closest-side, rgba(169, 184, 255, 0.11), transparent);
+  pointer-events: none;
+}
+.hero .wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 3rem;
+  align-items: center;
+  padding-block: 4.5rem 5rem;
+}
+.comment { font-family: var(--font-mono); font-size: 0.86rem; color: var(--muted); margin: 0 0 1rem; }
+.comment b { color: var(--mint); font-weight: 400; }
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 8.5vw, 6.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin: 0 0 1.2rem;
+}
+h1 span { display: block; }
+h1 .sur { color: var(--accent); }
+.role { font-family: var(--font-mono); font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--mint); margin: 0 0 1.3rem; }
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  background: var(--accent);
+  vertical-align: -0.17em;
+  margin-left: 0.2em;
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.lead { color: var(--muted); max-width: 33rem; margin: 0 0 2rem; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-decoration: none;
+  padding: 0.8rem 1.3rem;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); font-weight: 500; }
+.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px -10px rgba(169, 184, 255, 0.7); }
+.btn.ghost { color: var(--accent); }
+.btn.ghost:hover { background: rgba(169, 184, 255, 0.1); }
+
+/* Windows (editor / terminal look) */
+.win {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+}
+.win-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.65rem 0.95rem;
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--line);
+}
+.dots { display: flex; gap: 6px; flex: none; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--rose); opacity: 0.75; }
+.dots i:nth-child(2) { background: var(--amber); }
+.dots i:nth-child(3) { background: var(--mint); }
+.win-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.term { padding: 1.2rem 1.3rem 1.4rem; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.7; }
+.term p { margin: 0; }
+.term .cmd { color: var(--fg); }
+.term .cmd::before { content: "$ "; color: var(--mint); }
+.term .out { color: var(--muted); margin-bottom: 0.7rem; padding-left: 1.2ch; }
+.term .out b { color: var(--amber); font-weight: 500; }
+
+/* Figures */
+.figures { border-block: 1px solid var(--line); background: rgba(15, 21, 34, 0.6); }
+.figures .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.fig { padding: 1.6rem 1.4rem; border-left: 1px solid var(--line); }
+.fig:first-child { border-left: 0; padding-left: 0; }
+.fig b { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4.5vw, 2.8rem); line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+.fig span { display: block; margin-top: 0.5rem; font-size: 0.86rem; color: var(--muted); max-width: 15rem; }
+
+/* Sections */
+section { padding-block: 5rem; }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0 0 2.2rem;
+}
+h2::before { content: "// "; color: var(--mint); font-family: var(--font-mono); font-weight: 400; }
+
+/* About (line-numbered editor) */
+.code { counter-reset: ln; padding: 1.2rem 0; }
+.code > * { counter-increment: ln; position: relative; margin: 0; padding: 0.35rem 1.5rem 0.35rem 4rem; }
+.code > *::before {
+  content: counter(ln);
+  position: absolute;
+  left: 0;
+  width: 2.8rem;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: #4B5875;
+}
+.code .h { font-family: var(--font-mono); color: var(--mint); font-size: 0.95rem; }
+.code .h b { color: var(--muted); font-weight: 400; }
+.code .t { font-size: 1.05rem; max-width: 48rem; }
+.code .t em { font-style: normal; color: var(--accent); }
+.code .q { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 0.8rem; }
+.pill { font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber); border: 1px solid var(--line); border-radius: 999px; padding: 0.25rem 0.8rem; }
+
+/* Project cards with spotlight */
+.featured { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+.card {
+  position: relative;
+  --mx: 50%;
+  --my: 0%;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(169, 184, 255, 0.14), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.card:hover, .card:focus-within {
+  transform: translateY(-5px);
+  border-color: rgba(169, 184, 255, 0.55);
+  box-shadow: 0 24px 60px -28px rgba(169, 184, 255, 0.4);
+}
+.card:hover::before, .card:focus-within::before { opacity: 1; }
+.card:hover .win-title { color: var(--accent); }
+.card-body { position: relative; padding: 1.6rem 1.6rem 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
+.meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber); margin: 0; }
+.card h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 3.4vw, 2.1rem); letter-spacing: -0.025em; line-height: 1.1; margin: 0; }
+.card h4 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.015em; line-height: 1.25; margin: 0; }
+.intro { margin: 0; color: var(--muted); }
+.card ul { list-style: none; margin: 0; padding: 0; }
+.card li { position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; font-size: 0.94rem; transition: transform 0.2s; }
+.card li::before { content: "›"; position: absolute; left: 0; color: var(--accent); font-family: var(--font-mono); }
+.card:hover li { transform: translateX(3px); }
+.tags { margin-top: auto; padding-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  --c: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.22rem 0.6rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
+.tags .tag:nth-child(4n+2) { --c: var(--mint); }
+.tags .tag:nth-child(4n+3) { --c: var(--amber); }
+.tags .tag:nth-child(4n+4) { --c: var(--rose); }
+.card:hover .tag { border-color: var(--c); }
+.links { display: flex; flex-wrap: wrap; gap: 0.6rem; padding-top: 0.3rem; }
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.link-btn::after { content: "↗"; }
+.link-btn:hover { border-color: var(--accent); background: rgba(169, 184, 255, 0.1); }
+.academic .wide { grid-column: 1 / -1; }
+.sub-h { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 400; color: var(--muted); margin: 3.5rem 0 1.2rem; }
+.sub-h b { color: var(--mint); font-weight: 400; }
+.academic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.academic .card-body { padding: 1.3rem 1.4rem 1.3rem; gap: 0.7rem; }
+.academic .intro { font-size: 0.93rem; }
+
+/* Timeline (git log) */
+.parcours-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
+.log { list-style: none; margin: 0; padding: 0; }
+.log li { position: relative; padding: 0 0 2.2rem 2.2rem; border-left: 1px solid var(--line); margin-left: 6px; }
+.log li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.log li::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 0.35rem;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+}
+.log li.now::before { background: var(--accent); box-shadow: 0 0 0 5px rgba(169, 184, 255, 0.18); }
+.log .date { font-family: var(--font-mono); font-size: 0.78rem; color: var(--mint); margin: 0; }
+.log h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -0.015em; margin: 0.2rem 0; }
+.log .where { color: var(--accent); margin: 0 0 0.4rem; font-size: 0.93rem; }
+.log .what { margin: 0; color: var(--muted); max-width: 40rem; font-size: 0.95rem; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); }
+.skills .k { font-family: var(--font-mono); font-size: 0.8rem; color: var(--mint); padding: 1.1rem 1rem 1.1rem 1.6rem; border-top: 1px solid var(--line); }
+.skills .v { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 1rem 1.6rem 1rem 0; border-top: 1px solid var(--line); }
+.skills .k:first-child, .skills .k:first-child + .v { border-top: 0; }
+.skills .v .tag:hover { color: var(--accent); border-color: var(--accent); }
+.skills .v .tag:nth-child(5n+2) { --c: var(--mint); }
+.skills .v .tag:nth-child(5n+3) { --c: var(--amber); }
+.skills .v .tag:nth-child(5n+4) { --c: var(--rose); }
+.langs { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin-top: 1.8rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); }
+.langs b { color: var(--fg); font-weight: 500; font-family: var(--font-display); font-size: 1.05rem; margin-right: 0.5rem; }
+
+/* Contact */
+.contact h2 { max-width: 44rem; margin-bottom: 1rem; }
+.contact h2::before { display: block; margin-bottom: 0.6rem; font-size: 0.9rem; }
+.contact h2 em { font-style: normal; color: var(--accent); }
+.closing { color: var(--muted); max-width: 34rem; margin: 0 0 2.2rem; }
+.rows { padding: 0.4rem 0; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.95rem 1.4rem; border-top: 1px solid var(--line); min-width: 0; }
+.row:first-child { border-top: 0; }
+.row .lbl { font-family: var(--font-mono); font-size: 0.78rem; color: var(--mint); flex: none; width: 7.5rem; }
+.row .val { flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 0.92rem; overflow-wrap: anywhere; user-select: all; }
+.row a.val { color: var(--accent); text-decoration: none; user-select: auto; }
+.row a.val:hover { text-decoration: underline; }
+.copy {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+.copy:hover { border-color: var(--accent); background: rgba(169, 184, 255, 0.08); }
+
+footer { border-top: 1px solid var(--line); padding-block: 1.8rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.78rem; }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+
+@media (max-width: 880px) {
+  .site-header .wrap { flex-direction: column; align-items: stretch; gap: 0; }
+  .brand { padding-bottom: 0; }
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; padding-block: 3rem 3.5rem; }
+  .featured, .academic, .parcours-grid { grid-template-columns: minmax(0, 1fr); }
+  section { padding-block: 3.5rem; }
+  .fig { padding-left: 1rem; }
+  .fig:first-child { padding-left: 0; }
+}
+@media (max-width: 560px) {
+  .fig { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+  .fig:first-child { border-top: 0; }
+  .skills { grid-template-columns: minmax(0, 1fr); }
+  .skills .k { padding: 1rem 1.2rem 0.2rem; }
+  .skills .v { padding: 0.4rem 1.2rem 1rem; border-top: 0; }
+  .skills .k:first-child + .v { border-top: 0; }
+  .row { flex-wrap: wrap; padding-inline: 1.1rem; }
+  .row .lbl { width: 100%; }
+  .code > * { padding-left: 3.2rem; padding-right: 1rem; }
+  .card-body { padding: 1.3rem 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cursor { animation: none; }
+  .card, .card::before, .card li, .btn { transition: none; }
+  .card:hover, .card:focus-within { transform: none; }
+  .card:hover li { transform: none; }
+}
+</style>
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">Wiam <b>Aarab</b></a>
+    <nav aria-label="Navigation principale">
+      <ul class="tabs">
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="comment"><b>//</b> Bonjour, je suis</p>
+        <h1><span>Wiam</span><span class="sur">Aarab</span></h1>
+        <p class="role">Étudiante ingénieure · Génie Logiciel &amp; IA<span class="cursor" aria-hidden="true"></span></p>
+        <p class="lead">En dernière année à l'ENSA d'Oujda, je développe des applications web, desktop et mobile. Je cherche un stage de fin d'études à partir du 1er février 2027.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#projets">Voir mes projets</a>
+          <a class="btn ghost" href="#contact">Me contacter</a>
+        </div>
+      </div>
+      <div class="win" aria-label="Présentation rapide">
+        <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">terminal · présentation</span></div>
+        <div class="term">
+          <p class="cmd">qui-suis-je</p>
+          <p class="out">Wiam Aarab, étudiante en cycle ingénieur</p>
+          <p class="cmd">formation</p>
+          <p class="out">ENSA Oujda · Génie Logiciel &amp; IA · promo <b>2027</b></p>
+          <p class="cmd">technologies</p>
+          <p class="out">Laravel · Java · Python · React.js · MySQL</p>
+          <p class="cmd">recherche</p>
+          <p class="out">Stage de fin d'études (PFE) dès le <b>1er février 2027</b></p>
+          <p class="cmd"><span class="cursor" aria-hidden="true"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="figures">
+    <div class="wrap">
+      <div class="fig"><b>2</b><span>stages en développement web et full stack</span></div>
+      <div class="fig"><b>17</b><span>tables MySQL conçues pour la plateforme TechMaint</span></div>
+      <div class="fig"><b>100 000+</b><span>lignes de données électorales traitées et optimisées</span></div>
+      <div class="fig"><b>9</b><span>statuts dans le cycle de vie des interventions</span></div>
+    </div>
+  </div>
+
+  <section id="a-propos">
+    <div class="wrap">
+      <h2>À propos</h2>
+      <div class="win">
+        <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">a-propos.md</span></div>
+        <div class="code">
+          <p class="h"><b>##</b> Profil</p>
+          <p class="t">J'ai développé des applications <em>web, desktop et mobile</em> avec Laravel, Java et Python, et réalisé deux stages en développement web et full stack.</p>
+          <p class="t">Je souhaite rejoindre une équipe pour concevoir et livrer des solutions logicielles concrètes.</p>
+          <p class="h"><b>##</b> Qualités</p>
+          <div class="q">
+            <span class="pill">Travail en équipe</span>
+            <span class="pill">Rigueur</span>
+            <span class="pill">Sens des responsabilités</span>
+            <span class="pill">Ouverture d'esprit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets" style="padding-top:0">
+    <div class="wrap">
+      <h2>Projets &amp; stages</h2>
+
+      <div class="featured">
+        <article class="win card">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">techmaint · stage OpenAx</span></div>
+          <div class="card-body">
+            <p class="meta">OpenAx, Oujda · Juillet – Août 2026</p>
+            <h3>TechMaint</h3>
+            <p class="intro">Plateforme web et mobile de GMAO pour automatiser la gestion et le suivi des interventions de maintenance.</p>
+            <ul>
+              <li>Base de données MySQL de 17 tables et backend Laravel 13 avec API RESTful sécurisée par Sanctum et gestion multi-rôles.</li>
+              <li>Cycle de vie des interventions en 9 statuts, avec un algorithme qui suggère les techniciens selon leurs compétences et leur disponibilité.</li>
+              <li>Interface mobile responsive avec scan de QR Code par caméra pour identifier les équipements et saisir les comptes-rendus (photos, pièces, temps passé).</li>
+              <li>Comptes-rendus d'intervention générés en PDF avec calcul des coûts, signature et avis du client.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Laravel 13</span><span class="tag">PHP 8.3</span><span class="tag">MySQL</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">DomPDF</span><span class="tag">Git</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="win card">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">donnees-electorales · stage Figuig</span></div>
+          <div class="card-body">
+            <p class="meta">Province de Figuig, Bouarfa · Juillet 2024</p>
+            <h3>Données électorales</h3>
+            <p class="intro">Application web sécurisée de gestion et d'automatisation des données électorales.</p>
+            <ul>
+              <li>Traitement et optimisation de fichiers Excel et CSV de plus de 100 000 lignes.</li>
+              <li>Détection automatique des doublons et des redondances dans les listes électorales.</li>
+              <li>Rapports statistiques exportables en PDF et outils de comparaison pour suivre les flux d'électeurs.</li>
+              <li>Automatisation des documents administratifs : listes d'émargement et convocations.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Application web</span><span class="tag">Excel / CSV</span><span class="tag">Export PDF</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="sub-h"><b>//</b> Projets académiques</h3>
+      <div class="academic">
+        <article class="win card">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">traitements-medicaux</span></div>
+          <div class="card-body">
+            <h4>Gestion de traitements médicaux</h4>
+            <p class="intro">Interfaces Administrateur et Client, gestion des traitements, des réservations et des statistiques.</p>
+            <div class="tags"><span class="tag">Java</span><span class="tag">JavaFX</span></div>
+          </div>
+        </article>
+        <article class="win card">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">gestion-bibliotheque</span></div>
+          <div class="card-body">
+            <p class="meta">Projet académique · individuel · Juin 2025</p>
+            <h4>Gestion de bibliothèque</h4>
+            <p class="intro">Application de bureau pour gérer les livres, les adhérents et les prêts d'une bibliothèque, en programmation orientée objet.</p>
+            <ul>
+              <li>Écran de connexion et gestion complète des livres et des adhérents (ajout, consultation, modification, suppression).</li>
+              <li>Emprunts et retours avec historique enregistré dans un fichier CSV.</li>
+              <li>Tableau de bord statistique : genres, auteurs les plus représentés et activité des 30 derniers jours.</li>
+              <li>Rapport technique avec diagrammes de classes UML.</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">Matplotlib</span><span class="tag">UML</span></div>
+            <div class="links">
+              <a class="link-btn" href="https://github.com/wiam-4/Gestion_Bibliotheque_AarabWiam" target="_blank" rel="noopener">Voir le code</a>
+              <a class="link-btn" href="https://github.com/wiam-4/Gestion_Bibliotheque_AarabWiam/blob/main/assets/VIDEO_REPRESENTATIVE.mp4" target="_blank" rel="noopener">Voir la démo</a>
+              <a class="link-btn" href="https://github.com/wiam-4/Gestion_Bibliotheque_AarabWiam/blob/main/docs/RAPPORT.pdf" target="_blank" rel="noopener">Lire le rapport</a>
+            </div>
+          </div>
+        </article>
+        <article class="win card">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">gestion-du-temps · mobile</span></div>
+          <div class="card-body">
+            <p class="meta">Projet académique · en équipe</p>
+            <h4>Application de gestion du temps</h4>
+            <p class="intro">Alarmes avec défis cognitifs et cycles de sommeil de 90 min, blocage d'applications, Pomodoro, calendrier de priorités et suivi statistique du repos.</p>
+            <div class="tags"><span class="tag">Android Studio</span><span class="tag">Java</span></div>
+            <div class="links"><a class="link-btn" href="https://github.com/Hicham-El-Mouloudi/My-Time" target="_blank" rel="noopener">Voir le code</a></div>
+          </div>
+        </article>
+        <article class="win card">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">simulation-medicale-vr</span></div>
+          <div class="card-body">
+            <h4>Simulation médicale en réalité virtuelle</h4>
+            <p class="intro">Évolution d'une simulation existante avec des scripts C# (boutons d'action interactifs) et un système de messages pour guider le patient.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span></div>
+          </div>
+        </article>
+        <article class="win card wide">
+          <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">projets-javascript</span></div>
+          <div class="card-body">
+            <p class="meta">Projet personnel · individuel · Juin 2025</p>
+            <h4>30 mini-projets JavaScript</h4>
+            <p class="intro">Trente applications web en JavaScript natif, HTML5 et CSS3, sans framework : jeux (Taquin, Memory, Morpion, Pierre-Papier-Ciseaux), outils (to-do list, lecteur de musique, chronomètre, minuteur), convertisseurs (texte vers Morse, bases numériques, IMC), générateur de mots de passe et formulaire validé par Regex.</p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">DOM API</span></div>
+            <div class="links"><a class="link-btn" href="https://github.com/wiam-4/PROJETS-JAVASCRIPT" target="_blank" rel="noopener">Voir le code</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="parcours" style="padding-top:0">
+    <div class="wrap">
+      <h2>Parcours</h2>
+      <div class="parcours-grid">
+        <div>
+          <h3 class="sub-h" style="margin-top:0"><b>//</b> Formation</h3>
+          <ol class="log">
+            <li class="now">
+              <p class="date">2024 – 2027 · en cours</p>
+              <h3>Cycle ingénieur en Génie Informatique</h3>
+              <p class="where">ENSA Oujda · option Génie Logiciel &amp; IA</p>
+              <p class="what">Dernière année du cycle ingénieur.</p>
+            </li>
+            <li>
+              <p class="date">2022 – 2024</p>
+              <h3>Classes préparatoires aux grandes écoles</h3>
+              <p class="where">CPGE, filière MP · Oujda</p>
+            </li>
+            <li>
+              <p class="date">2022</p>
+              <h3>Baccalauréat Sciences Mathématiques A</h3>
+              <p class="where">Lycée Technique Mohammed Abed El Jaberi · Bouarfa</p>
+            </li>
+          </ol>
+        </div>
+        <div>
+          <h3 class="sub-h" style="margin-top:0"><b>//</b> Expériences professionnelles</h3>
+          <ol class="log">
+            <li>
+              <p class="date">Juillet – Août 2026</p>
+              <h3>Stagiaire développeuse Full Stack</h3>
+              <p class="where">OpenAx, Oujda</p>
+              <p class="what">Conception et développement de TechMaint, plateforme de GMAO web et mobile.</p>
+            </li>
+            <li>
+              <p class="date">Juillet 2024</p>
+              <h3>Stagiaire développeuse Web</h3>
+              <p class="where">Province de Figuig, Bouarfa</p>
+              <p class="what">Application web sécurisée de gestion et d'automatisation des données électorales.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="competences" style="padding-top:0">
+    <div class="wrap">
+      <h2>Compétences techniques</h2>
+      <div class="win">
+        <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">competences</span></div>
+        <div class="skills">
+          <div class="k">Langages</div>
+          <div class="v"><span class="tag">Java</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">XML</span></div>
+          <div class="k">Frameworks</div>
+          <div class="v"><span class="tag">Laravel</span><span class="tag">JEE (Java EE)</span><span class="tag">JavaFX</span><span class="tag">React.js</span><span class="tag">Tailwind CSS</span><span class="tag">Streamlit</span><span class="tag">Tkinter</span></div>
+          <div class="k">Web &amp; API</div>
+          <div class="v"><span class="tag">API RESTful</span><span class="tag">Laravel Sanctum</span><span class="tag">Gestion multi-rôles</span><span class="tag">Interfaces responsive</span><span class="tag">PDF avec DomPDF</span></div>
+          <div class="k">Bases de données</div>
+          <div class="v"><span class="tag">MySQL</span><span class="tag">SQLite</span><span class="tag">Modélisation relationnelle</span></div>
+          <div class="k">Mobile &amp; VR</div>
+          <div class="v"><span class="tag">Android Studio (Java)</span><span class="tag">Unity (C#)</span></div>
+          <div class="k">Conception &amp; outils</div>
+          <div class="v"><span class="tag">UML</span><span class="tag">Merise</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Travail collaboratif</span></div>
+          <div class="k">Systèmes</div>
+          <div class="v"><span class="tag">Windows</span><span class="tag">Linux</span></div>
+        </div>
+      </div>
+      <div class="langs">
+        <span><b>Arabe</b>langue maternelle</span>
+        <span><b>Français</b>B2</span>
+        <span><b>Anglais</b>B1</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" style="padding-top:0">
+    <div class="wrap">
+      <h2>Prête à rejoindre votre équipe <em>dès le 1er février 2027.</em></h2>
+      <p class="closing">Je cherche un stage de fin d'études en génie logiciel. Écrivez-moi, je réponds volontiers.</p>
+      <div class="win">
+        <div class="win-bar"><span class="dots"><i></i><i></i><i></i></span><span class="win-title">contact</span></div>
+        <div class="rows">
+          <div class="row"><span class="lbl">email</span><span class="val" id="v-mail">wiamaarab50@gmail.com</span><button class="copy" type="button" data-target="v-mail">Copier</button></div>
+          <div class="row"><span class="lbl">téléphone</span><span class="val" id="v-tel">+212 670 780 480</span><button class="copy" type="button" data-target="v-tel">Copier</button></div>
+          <div class="row"><span class="lbl">linkedin</span><a class="val" href="https://linkedin.com/in/wiam-aarab-164b93361" target="_blank" rel="noopener">linkedin.com/in/wiam-aarab-164b93361</a></div>
+          <div class="row"><span class="lbl">github</span><a class="val" href="https://github.com/wiam-4" target="_blank" rel="noopener">github.com/wiam-4</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Wiam Aarab</span>
+    <span>Oujda, Maroc</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* Spotlight that follows the pointer on project cards */
+  document.querySelectorAll('.card').forEach(function (card) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* Copy buttons */
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.getAttribute('data-target'));
+      var text = el.textContent;
+      function selectIt() {
+        var r = document.createRange();
+        r.selectNodeContents(el);
+        var s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+      }
+      function done() {
+        var old = b.textContent;
+        b.textContent = 'Copié';
+        setTimeout(function () { b.textContent = old; }, 1500);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, selectIt);
+      } else {
+        selectIt();
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
