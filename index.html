@@ -449,9 +449,9 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
   <div class="figures">
     <div class="wrap">
       <div class="fig"><b>2</b><span>stages en développement web et full stack</span></div>
-      <div class="fig"><b>17</b><span>tables MySQL conçues pour la plateforme TechMaint</span></div>
+      <div class="fig"><b>4</b><span>interfaces dédiées par profil (admin, responsable, technicien, client) sur TechMaint</span></div>
       <div class="fig"><b>100 000+</b><span>lignes de données électorales traitées et optimisées</span></div>
-      <div class="fig"><b>9</b><span>statuts dans le cycle de vie des interventions</span></div>
+      <div class="fig"><b>9</b><span>statuts d'intervention gérés dans l'interface</span></div>
     </div>
   </div>
 
@@ -486,15 +486,16 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
           <div class="card-body">
             <p class="meta">OpenAx, Oujda · Juillet – Août 2026</p>
             <h3>TechMaint</h3>
-            <p class="intro">Plateforme web et mobile de GMAO pour automatiser la gestion et le suivi des interventions de maintenance.</p>
+            <p class="intro">Plateforme web et mobile de GMAO pour automatiser la gestion et le suivi des interventions de maintenance. <b>Ma part : le développement front-end</b> ; le backend a été réalisé par d'autres membres de l'équipe.</p>
             <ul>
-              <li>Base de données MySQL de 17 tables et backend Laravel 13 avec API RESTful sécurisée par Sanctum et gestion multi-rôles.</li>
-              <li>Cycle de vie des interventions en 9 statuts, avec un algorithme qui suggère les techniciens selon leurs compétences et leur disponibilité.</li>
-              <li>Interface mobile responsive avec scan de QR Code par caméra pour identifier les équipements et saisir les comptes-rendus (photos, pièces, temps passé).</li>
-              <li>Comptes-rendus d'intervention générés en PDF avec calcul des coûts, signature et avis du client.</li>
+              <li>Design system Tailwind CSS et 4 interfaces Blade (admin, responsable, technicien, client), chacune avec sa navigation, ses tableaux de bord et sa page de connexion.</li>
+              <li>Tableaux de bord dynamiques (indicateurs, graphiques Chart.js, filtres par période) et calendrier de planning des interventions avec FullCalendar.</li>
+              <li>Suivi des interventions : listes filtrables, boutons de workflow terrain (déplacement, démarrage, attente de pièce, résolution), photos, pièces consommées et historique des statuts.</li>
+              <li>Interface mobile responsive pour les techniciens, avec scan de QR Code par caméra (html5-qrcode) pour identifier les équipements.</li>
+              <li>Validation des travaux par le client avec notation par étoiles, centre de notifications et modèle A4 du compte-rendu PDF en HTML/CSS.</li>
             </ul>
             <div class="tags">
-              <span class="tag">Laravel 13</span><span class="tag">PHP 8.3</span><span class="tag">MySQL</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">DomPDF</span><span class="tag">Git</span>
+              <span class="tag">Blade</span><span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Chart.js</span><span class="tag">FullCalendar</span><span class="tag">html5-qrcode</span><span class="tag">Git</span>
             </div>
           </div>
         </article>
@@ -621,7 +622,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
               <p class="date">Juillet – Août 2026</p>
               <h3>Stagiaire développeuse Full Stack</h3>
               <p class="where">OpenAx, Oujda</p>
-              <p class="what">Conception et développement de TechMaint, plateforme de GMAO web et mobile.</p>
+              <p class="what">Développement du front-end de TechMaint, plateforme de GMAO web et mobile (interfaces par profil, tableaux de bord, calendrier, version mobile avec scan de QR Code).</p>
             </li>
             <li>
               <p class="date">Juillet 2024</p>
@@ -644,7 +645,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
           <div class="k">Langages</div>
           <div class="v"><span class="tag">Java</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">XML</span></div>
           <div class="k">Frameworks</div>
-          <div class="v"><span class="tag">Laravel</span><span class="tag">JEE (Java EE)</span><span class="tag">JavaFX</span><span class="tag">React.js</span><span class="tag">Tailwind CSS</span><span class="tag">Streamlit</span><span class="tag">Tkinter</span></div>
+          <div class="v"><span class="tag">Laravel</span><span class="tag">JEE (Java EE)</span><span class="tag">JavaFX</span><span class="tag">React.js</span><span class="tag">Tailwind CSS</span><span class="tag">Blade</span><span class="tag">Chart.js</span><span class="tag">FullCalendar</span><span class="tag">Streamlit</span><span class="tag">Tkinter</span></div>
           <div class="k">Web &amp; API</div>
           <div class="v"><span class="tag">API RESTful</span><span class="tag">Laravel Sanctum</span><span class="tag">Gestion multi-rôles</span><span class="tag">Interfaces responsive</span><span class="tag">PDF avec DomPDF</span></div>
           <div class="k">Bases de données</div>
